@@ -11,5 +11,14 @@ abstract class Desconto
     public function __construct(?Desconto $proximoDesconto) {
         $this->proximoDesconto = $proximoDesconto;
     }
-abstract public function calculaDesconto(Orcamento $orcamento): float;
+
+    public function calcula(Orcamento $orcamento) {
+        $calculo = $this->calculaDesconto($orcamento);
+        if($calculo === 0) {
+            $this->proximoDesconto->calcula($orcamento);
+        }
+    }
+
+    abstract public function calculaDesconto(Orcamento $orcamento): float;
+
 }
