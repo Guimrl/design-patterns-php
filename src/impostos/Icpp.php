@@ -4,14 +4,21 @@ namespace src\DesignPattern\Impostos;
 
 use src\DesignPattern\Orcamento;
 
-class Icpp implements Imposto
+class Icpp extends ImpostoCom2Aliquotas
 {
-    public function calculaImposto(Orcamento $orcamento): float
-    {
-        if($orcamento->valor > 500) {
-            return $orcamento->valor * 0.03;
-        }
 
+    protected function deveAplicarTaxaMaxima(Orcamento $orcamento): bool
+    {
+        return $orcamento->valor > 500;
+    }
+
+    protected function calculaTaxaMaxima(Orcamento $orcamento): float
+    {
+        return $orcamento->valor * 0.03;
+    }
+
+    protected function calculaTaxaMinima(Orcamento $orcamento): float
+    {
         return $orcamento->valor * 0.02;
     }
 }
