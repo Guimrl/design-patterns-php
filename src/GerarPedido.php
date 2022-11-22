@@ -2,7 +2,7 @@
 
 namespace src\DesignPattern;
 
-class GerarPedido implements Command
+class GerarPedido
 {
     private float $valorOrcamento;
     private int $numeroItens;
@@ -15,18 +15,15 @@ class GerarPedido implements Command
         $this->nomeCliente = $nomeCliente;
     }
 
-    public function execute(){
+    public function getValorOrcamento(): float {
+        return $this->valorOrcamento;
+    }
 
-        $orcamento = new Orcamento();
-        $orcamento->quantidadeItens = $this->numeroItens;
-        $orcamento->valor = $this->valorOrcamento;
+    public function getNumeroItens(): int {
+        return $this->numeroItens;
+    }
 
-        $pedido = new Pedido();
-        $pedido->dataFinalizacao = new \DateTimeImmutable();
-        $pedido->nomeCliente = $this->nomeCliente;
-        $pedido->orcamento = $orcamento;
-
-        echo "Cria pedido no banco de dados ". PHP_EOL;
-        echo "Envia e-mail para cliente ". PHP_EOL;
+    public function getNomeCliente(): string {
+        return $this->nomeCliente;
     }
 }
